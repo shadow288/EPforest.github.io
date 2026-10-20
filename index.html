@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《Ecological Processes》森林生态系统生态学虚拟专刊</title>
+<style>
+  :root {
+    --green:#2f6b3d; --green-d:#1f4a2a; --green-l:#e8f1ea;
+    --ink:#1d2b22; --muted:#5d6b63; --line:#dde6e0; --bg:#f6f9f6; --card:#ffffff;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",
+    "PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink); background:var(--bg);
+    line-height:1.65; }
+  a { color:var(--green); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  header { background:linear-gradient(135deg,var(--green-d),var(--green)); color:#fff;
+    padding:42px 20px 34px; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 18px; }
+  header h1 { margin:0 0 6px; font-size:26px; letter-spacing:.5px; }
+  header .en { font-size:14px; opacity:.85; font-weight:400; }
+  header .sub { margin-top:14px; font-size:14px; opacity:.92; max-width:760px; }
+  .stats { display:flex; flex-wrap:wrap; gap:22px; margin-top:18px; font-size:13px;
+    opacity:.95; }
+  .stats b { display:block; font-size:22px; font-weight:700; }
+  main { max-width:980px; margin:26px auto 60px; padding:0 18px; }
+  .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    margin-bottom:18px; }
+  .search { flex:1 1 240px; min-width:200px; padding:10px 14px; border:1px solid var(--line);
+    border-radius:10px; font-size:14px; background:var(--card); }
+  .search:focus { outline:none; border-color:var(--green); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { border:1px solid var(--line); background:var(--card); color:var(--muted);
+    padding:6px 13px; border-radius:20px; font-size:13px; cursor:pointer;
+    transition:.15s; }
+  .chip:hover { border-color:var(--green); color:var(--green); }
+  .chip.active { background:var(--green); color:#fff; border-color:var(--green); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; margin-bottom:16px; box-shadow:0 1px 3px rgba(31,74,42,.05);
+    transition:.15s; }
+  .card:hover { box-shadow:0 4px 16px rgba(31,74,42,.10); border-color:#c7d8cd; }
+  .card-head { display:flex; gap:14px; align-items:flex-start; }
+  .num { flex:0 0 auto; width:40px; height:40px; border-radius:10px;
+    background:var(--green-l); color:var(--green-d); font-weight:700; font-size:16px;
+    display:flex; align-items:center; justify-content:center; }
+  .head-text { flex:1; }
+  .title { margin:0 0 4px; font-size:17px; line-height:1.45; color:var(--ink); }
+  .authors { margin:0 0 3px; font-size:13.5px; color:var(--muted); font-style:italic; }
+  .cite { margin:0 0 8px; font-size:12.5px; color:var(--muted); }
+  .doi { font-family:"SFMono-Regular",Consolas,monospace; font-size:12px; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-size:11.5px; padding:2px 9px; border-radius:12px; background:var(--green-l);
+    color:var(--green-d); }
+  .tag-climate { background:#fdeede; color:#9a5b18; }
+  .tag-invasion { background:#fbe3e3; color:#a13232; }
+  .tag-management { background:#e3eefb; color:#2b5a9a; }
+  .tag-productivity { background:#eef0fb; color:#4a3fa0; }
+  .abs-wrap { margin:10px 0 12px 54px; }
+  .abs-toggle { font-size:13px; color:var(--green-d); cursor:pointer; user-select:none;
+    font-weight:600; padding:4px 0; }
+  .abs-toggle::before { content:"▸ "; }
+  .abs-wrap[open] .abs-toggle::before { content:"▾ "; }
+  .abs-wrap[open] .abs-toggle { margin-bottom:6px; }
+  .abstract { font-size:13.5px; color:#3c4a42;
+    background:var(--green-l); border-left:3px solid var(--green); padding:10px 14px;
+    border-radius:0 8px 8px 0; }
+  .card-foot { margin-left:54px; }
+  .btn { display:inline-block; background:var(--green); color:#fff; padding:8px 16px;
+    border-radius:9px; font-size:13.5px; font-weight:600; }
+  .btn:hover { background:var(--green-d); text-decoration:none; }
+  .empty { text-align:center; color:var(--muted); padding:40px; display:none; }
+  footer { border-top:1px solid var(--line); padding:22px 18px; text-align:center;
+    color:var(--muted); font-size:12.5px; }
+  @media(max-width:640px){ .abs-wrap,.card-foot{ margin-left:0; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>《Ecological Processes》森林生态系统生态学虚拟专刊</h1>
+    <div class="en">Forest Ecosystem Ecology — Virtual Special Issue</div>
+    <div class="sub">本虚拟专刊汇集森林生态系统生态学领域的最新研究，涵盖群落构建、生物地球化学循环、
+      全球变化与干扰响应、森林经营与恢复等方向，全部论文发表于 <b>Ecological Processes</b>。</div>
+    <div class="stats">
+      <div><b>20</b>篇论文</div>
+      <div><b>2024–2026</b>出版年</div>
+      <div><b>Ecological Processes</b>期刊</div>
+      <div><b>Open Access</b>开放获取</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <input class="search" id="search" type="text" placeholder="搜索标题、作者或关键词…">
+    <div class="chips" id="chips">
+      <button class="chip active" data-tag="all">全部</button>
+      <button class="chip" data-tag="community">群落构建与多样性</button><button class="chip" data-tag="carbon">碳循环与生物地球化学</button><button class="chip" data-tag="climate">全球变化与干扰</button><button class="chip" data-tag="litter">凋落物与土壤</button><button class="chip" data-tag="productivity">生产力与资源分配</button><button class="chip" data-tag="invasion">生物入侵</button><button class="chip" data-tag="management">森林经营与恢复</button>
+    </div>
+  </div>
+
+  <div id="list">
+    
+    <article class="card" data-tags="community,climate" data-num="1">
+      <div class="card-head">
+        <span class="num">01</span>
+        <div class="head-text">
+          <h3 class="title">Habitat filtering masks the detection of phylogenetic and functional density dependence on seedling survival across seasons in a subtropical forest, Southwestern China</h3>
+          <p class="authors">Wang, L., Wu, J., Chai, Y. et al.</p>
+          <p class="cite">Ecological Processes 15, 38 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-026-00694-5" target="_blank" rel="noopener">doi:10.1186/s13717-026-00694-5</a></p>
+          <div class="tags"><span class="tag tag-community">群落构建与多样性</span><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Negative density dependence and habitat filtering are crucial mechanisms driving species coexistence and community assembly. However, empirical evidence regarding how habitat filtering interacts with density dependence remains limited, particularly in terms of its influence on phylogenetic and functional density dependence in seedling dynamics. Seasonal variation in abiotic conditions (e.g., drought vs. high humidity) provides an opportunity to test whether habitat filtering masks or modifies density-dependent effects, as the strength of these mechanisms likely fluctuates with environmental stress. To address this gap, we assessed seasonal variation in seedling survival in response to phylogenetic distance and functional dissimilarity in a subtropical evergreen broad-leaved forest in Southwestern China, comparing models with and without habitat variables.
+Results We found significant positive effects of phylogenetic distance and functional dissimilarity on seedling survival in the dry season, indicating that seedlings survived better when they were more phylogenetically or functionally distant from their neighbors. This provides evidence for both phylogenetic and functional negative density dependence (PNDD and FNDD). Habitat variables (elevation, convexity, and soil organic matter content) significantly predicted seedling survival only in the dry season. Furthermore, habitat filtering masked the effect of PNDD and FNDD at both community and species levels and influenced the detection of their interactive effects on seedling survival. Overall, we observed marked seasonal variation in the effects of both density dependence and habitat variables.
+Conclusions This study demonstrates that habitat filtering obscures the detection of phylogenetic and functional density dependence in seedling survival and reveals a seasonally modulated link between neighborhood phylogenetic and functional structure and seedling survival. These findings highlight the importance of considering environmental context when assessing density-dependent mechanisms, advancing our understanding of forest community dynamics by showing that the strength and detectability of density dependence are contingent on both habitat conditions and seasonal abiotic stress.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="1.Habitat%20filtering%20masks%20the%20detection%20of%20phylogenetic%20and%20functional%20density%20dependence%20on%20seedling%20survival%20across%20seasons%20in%20a%20subtropical%20forest%2C%20Southwestern%20China.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="climate" data-num="2">
+      <div class="card-head">
+        <span class="num">02</span>
+        <div class="head-text">
+          <h3 class="title">Subtropical forests exhibit contrasting resistance and resilience to unexpected extreme ice storms</h3>
+          <p class="authors">Zhao, Y., Wang, Q., Nie, W. et al.</p>
+          <p class="cite">Ecological Processes 15, 48 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-026-00705-5" target="_blank" rel="noopener">doi:10.1186/s13717-026-00705-5</a></p>
+          <div class="tags"><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Extreme ice storms (EIS) can severely disrupt forest productivity and stability, yet their differential impacts across forest types remain poorly understood, particularly in subtropical regions. Here, we assessed changes in gross primary productivity (GPP), resistance (Rt), and resilience (Rs) across evergreen needle-leaved forest (ENF), evergreen broad-leaved forest (EBF), deciduous broad-leaved forest (DBF), and mixed forest (MF) in mid-to-north subtropical China following two unexpected EIS events in early 2008 and 2018. Random Forest and Partial Least Squares Structural Equation Modeling (PLS-SEM) were used to identify key drivers and disentangle their underlying causal pathways.
+Results Except for DBF, both EIS events led to declines in forest GPP, with the stronger 2008 event exerting a more pronounced suppressive effect. Forest stability exhibited a clear Rt–Rs trade-off across forest types—the 2008 event was characterized by lower Rt but higher Rs, whereas the opposite pattern was observed in 2018. Among forest types, DBF showed the highest stability, while EBF exhibited the lowest. Freezing duration had contrasting effects between the two events: prolonged freezing duration significantly reduced Rt and Rs in 2008, but enhanced both in 2018. Moreover, freezing intensity, particularly minimum-temperature stress and cumulative precipitation, was the foremost determinant of forest stability, whereas geographical factors acted mainly indirectly through climate interannual variability, freezing intensity, and phenology. Furthermore, biological attributes made relatively modest overall contributions but provided important insights into forest-type-specific stability mechanisms. Specifically, phenology dominated DBF stability, whereas forest structure acted primarily through leaf area index in DBF and MF and through stand age in ENF and EBF.
+Conclusions Subtropical forest responses to EIS are highly heterogeneous and jointly controlled by disturbance intensity, forest composition, and spatial environmental context. By revealing the mechanisms underlying forest-type-specific stability responses to EIS, this study provides useful insights for differentiated risk-resilience management aimed at enhancing ecosystem stability and sustainable development.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="2.Subtropical%20forests%20exhibit%20contrasting%20resistance%20and%20resilience%20to%20unexpected%20extreme%20ice%20storms.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="climate,carbon" data-num="3">
+      <div class="card-head">
+        <span class="num">03</span>
+        <div class="head-text">
+          <h3 class="title">Effects of chronic experimental N deposition on northern hardwood forests fade after cessation of N additions</h3>
+          <p class="authors">Reeves, E.C., Burton, A.J., Higdon, K.E. et al.</p>
+          <p class="cite">Ecological Processes 15, 50 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-026-00706-4" target="_blank" rel="noopener">doi:10.1186/s13717-026-00706-4</a></p>
+          <div class="tags"><span class="tag tag-climate">全球变化与干扰</span><span class="tag tag-carbon">碳循环与生物地球化学</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Anthropogenic nitrogen (N) deposition has the potential to affect forest ecosystem carbon (C) storage and sequestration both positively and negatively. Effects on aboveground biomass increment seem to be largely positive, but the impact of elevated N inputs on soil microbial systems in forests is often negative, reducing microbial biomass and soil respiration rates. Twenty-four years of experimental N deposition at a rate of 3 g N m−2 y−1 broadly suppressed soil microorganisms across four northern hardwood forest sites. To assess responses to reductions in chronic N inputs, soil and sugar maple root samples from the study sites were collected and examined for phospholipid fatty acid (PLFA) and neutral lipid fatty acid (NLFA) indicators of microbial groups at one- and three-years after the cessation of the N deposition treatment, and tree growth was measured annually for six years after treatments stopped.
+Results In the first year post-treatment, all soil and root microbial indicators remained suppressed, but by three years post-cessation of N additions, indicators for soil fungi and arbuscular mycorrhizal fungi (AMF) showed much less suppression, with several bacterial groups and measures of the total microbial community showing full recovery. By year three, significant differences also no longer existed between control and previously N-amended plots for PLFA and NLFA biomarkers indicative of AMF in tree fine roots. During active N loading, trees receiving the N deposition treatment increased their annual aboveground growth increment, in concert with reduced carbon allocation to AMF, but this growth enhancement faded during the six years after cessation of N additions.
+Conclusions Indicators of suppressed microbial community abundance showed gradual recovery from one to three years after cessation of long-term experimental N loading. This recovery indicates the potential for microbially-mediated ecosystem C sequestration responses to high anthropogenic N deposition, such as enhanced tree growth, reduced decomposition rates, and increased surface soil carbon content, to also fade when N inputs are reduced.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="3.Effects%20of%20chronic%20experimental%20N%20deposition%20on%20northern%20hardwood%20forests%20fade%20after%20cessation%20of%20N%20additions.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="climate" data-num="4">
+      <div class="card-head">
+        <span class="num">04</span>
+        <div class="head-text">
+          <h3 class="title">An 1800-year record of Austrocedrus chilensis growth reveals an unprecedented recent decline in the Patagonian forest–steppe ecotone</h3>
+          <p class="authors">Wouters, D., Christie, D.A., LeQuesne, C. et al.</p>
+          <p class="cite">Ecological Processes 15, 49 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-026-00704-6" target="_blank" rel="noopener">doi:10.1186/s13717-026-00704-6</a></p>
+          <div class="tags"><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Recent decades brought persistent warming and declining precipitation to the North Patagonian Andes, raising concerns about the capacity of temperate mountain forests to withstand climate stress at the semiarid forest–steppe ecotone. We assess whether current growth declines in Austrocedrus chilensis are unprecedented in a late Holocene context and whether intensified drought has contributed to a weakening of the relationship between climate and tree growth.
+Methods Increment cores from living trees were combined with subfossil cross-sections to develop cross-dated, millennial-length ring-width chronologies at three ecotonal sites in northern Patagonia. Site chronologies were standardized using multiple detrending approaches and integrated into a regional chronology. Recent growth trends were evaluated against long-term variability using chronology comparisons, climate–growth regression models, observed-minus-predicted residual analyses, and drought legacy approaches.
+Results Sustained growing-season warming since mid-1970s, together with more frequent severe droughts after 1997, has induced persistent multi-year moisture deficits since 2009. Across all sites, recent decades show a pronounced, persistent decline in A. chilensis growth that remains evident after accounting for age-related trends and differences in intrinsic growth rates among trees. Millennial records were integrated into a composite regional chronology extending back to CE 178, with a robust common signal from CE 520 onward. For 1917–2022, warm-season temperature and annual precipitation explain 42% of tree-growth variance, increasing to 46% when long-memory hydroclimatic variables capturing multi-year moisture deficits are included. Consistently, model performance deteriorates from the mid-1990s onward, overestimating observed growth and suggesting a loss of stationarity in climate–growth relationships. Residual analyses further show that growth reductions intensify under higher antecedent composite stress and persist for several years after droughts, consistent with drought legacy effects.
+Conclusions Our results reveal an unprecedented, persistent low-growth regime in ecotonal A. chilensis forests over the past two to three decades. This decline falls outside the range of natural variability observed in the millennial-length records and is not captured by long-term climate–growth models, pointing to a weakening of the relationship between climate and radial growth under ongoing warming and recurrent drought. These findings identify antecedent stress and drought legacy effects as key drivers of current forest performance in Patagonian forest–steppe ecotone.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="4.An%201800-year%20record%20of%20Austrocedrus%20chilensis%20growth%20reveals%20an%20unprecedented%20recent%20decline%20in%20the%20Patagonian%20forest%E2%80%93steppe%20ecotone.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="litter,carbon" data-num="5">
+      <div class="card-head">
+        <span class="num">05</span>
+        <div class="head-text">
+          <h3 class="title">Non-additive effects of different litter mixtures on soil carbon and nitrogen dynamics controlled by litter functional identity and diversity across two soils in the temperate forests of northeastern China</h3>
+          <p class="authors">Zhang, Q., Yang, K., Zhu, J. et al.</p>
+          <p class="cite">Ecological Processes 15, 2 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-025-00658-1" target="_blank" rel="noopener">doi:10.1186/s13717-025-00658-1</a></p>
+          <div class="tags"><span class="tag tag-litter">凋落物与土壤</span><span class="tag tag-carbon">碳循环与生物地球化学</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Understanding how plant litter diversity influences soil carbon (C) and nitrogen (N) dynamics is critical for explaining C and N cycling in forest ecosystems. However, the influence of litter functional traits on soil C and N dynamics across different forest soils remains unclear. In this study, we incubated 38 litter mixtures from 10 dominant tree species with contrasting functional traits in soils from natural secondary forests (NSF) and Larix olgensis plantations (LOP) in northeastern China. We measured C and N mineralization, dissolved organic carbon (DOC), and microbial biomass carbon (MBC) to quantify non-additive effects. In addition, we evaluated the effects of litter functional identity (Community-weighted mean, CWM) and functional diversity (Rao’s Q) on non-additive effects across different soils.
+Results The non-additive effects of mixed leaf litter on soil C and N dynamics varied across the two soils. The proportion of non-additive effects on C and N mineralization, DOC, and MBC ranged from 17.8% to 60.7% in both soils. Non-additive effects were generally more frequent in NSF soils than in LOP soils, which may be attributed to the higher organic matter content and more diverse microbial communities. Trait-based models showed that functional diversity was the dominant predictor of non-additive effects in NSF soils, explaining 89.3% and 84.3% of the variations in C and N mineralization, respectively. However, in LOP soils, trait effects were more function-specific; functional diversity governed C mineralization, whereas functional identity had a greater influence on N mineralization. Specific traits, such as Rao’s Q of TN and TC, and CWM of TC, emerged as key regulators of non-additive effects.
+Conclusions Our findings underscore the importance of integrating trait-based frameworks with different forest soils to understand the non-additive effects of litter mixtures. By identifying how specific traits mediate soil C and N dynamics differently across the two soils, this study provides a theoretical basis for predicting biogeochemical responses to litter diversity, with implications for forest biodiversity conservation and soil fertility improvement strategies.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="5.Non-additive%20effects%20of%20different%20litter%20mixtures%20on%20soil%20carbon%20and%20nitrogen%20dynamics%20controlled%20by%20litter%20functional%20identity%20and%20diversity%20across%20two%20soils%20in%20the%20temperate%20forests%20of%20northeastern%20China.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="community" data-num="6">
+      <div class="card-head">
+        <span class="num">06</span>
+        <div class="head-text">
+          <h3 class="title">Local topographic and biotic neighborhood factors influence tree survival in a tropical dry forest, western Thailand</h3>
+          <p class="authors">Marod, D., Nakashizuka, T., Hiroshi, T. et al.</p>
+          <p class="cite">Ecological Processes 15, 5 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-025-00665-2" target="_blank" rel="noopener">doi:10.1186/s13717-025-00665-2</a></p>
+          <div class="tags"><span class="tag tag-community">群落构建与多样性</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Understanding variations in tree mortality and survival is essential to interpreting community dynamics and demographic processes. Tree size and both biotic and abiotic factors are among the local-scale drivers proposed to be essential to explain patterns of tree survival. However, detailed studies of their actual importance are lacking, particularly in tropical dry forests.
+Methods We investigated the influence of local topographic (i.e., abiotic) and biotic factors on tree survival at the community, guild, and species levels using data from a 4 ha (200 m × 200 m) permanent plot established in a mixed deciduous tropical dry forest at the Mae Klong Watershed Research Station, western Thailand. Censuses were conducted within the plot in December every 2 years from 1994 to 2022, in which tree mortality was assessed and measurements were performed on all trees with diameter at breast height ≥ 2 cm. Factors influencing tree survival were analyzed using a generalized linear mixed model.
+Results We found that tree size was the most important factor influencing tree survival, with a significant positive relationship for all but the largest trees. Among abiotic factors, only elevation had a significant positive effect on the longevity of shade-tolerant species. Of the biotic factors examined, tree density and total basal area significantly impacted tree survival in certain guilds and/or species.
+Conclusions Overall, the relative significance of factors influencing tree survival patterns in these tropical dry forests differed significantly across species guilds, tree size classes, and shade tolerance groups. These findings inform forest management in the study region and offer essential data for further research on forest dynamics.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="6.Local%20topographic%20and%20biotic%20neighborhood%20factors%20influence%20tree%20survival%20in%20a%20tropical%20dry%20forest%2C%20western%20Thailand.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="litter" data-num="7">
+      <div class="card-head">
+        <span class="num">07</span>
+        <div class="head-text">
+          <h3 class="title">The contributions of soil biota to litter mass loss and home-field advantage in temperate forests</h3>
+          <p class="authors">Sun, Y., Li, B., Li, Y. et al.</p>
+          <p class="cite">Ecological Processes 15, 7 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-025-00659-0" target="_blank" rel="noopener">doi:10.1186/s13717-025-00659-0</a></p>
+          <div class="tags"><span class="tag tag-litter">凋落物与土壤</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Soil biotic communities play an important ecological role in driving the litter decomposition, and moreover the home-field advantage (HFA). However, whether and how these communities with different body sizes regulate litter mass loss and HFA is still unclear.
+Methods We constructed a reciprocal transplantation microcosm decomposition experiment with the litter species and corresponding soil collected from three tree species distributed along an altitude gradient in Changbai Mountain in China (Corylus mandshurica Maxim. ex Rupr. at 700 m, Fraxinus mandshurica Rupr. at 1260 m, and Betula ermanii Cham. at 1800 m), respectively. We obtained a series of soil biotic communities with different body sizes through filtering soil solution with sieves ranging from 11 μm to 2 mm mesh. Microcosms were then inoculated with these community size fractions.
+Results Biotic community size fractions positively influenced the litter mass loss, while the contributions of soil biotic groups to litter mass loss were negatively related to their body size. Compared with mesofauna and microfauna, soil microorganisms contributed more to litter mass loss. The contributions of soil biotic groups to HFA were influenced by the interaction between biotic body size and litter species. Moreover, we found close relationships between litter mass loss, HFA and litter quality in the initial stage of decomposition, while community size fractions contributed directly to litter mass loss in the relatively later stage.
+Conclusion Our findings improve our understanding to the ecological role of different soil biotic communities in litter decomposition. It’s crucial for accurately predicting the nutrient cycling in forest ecosystem under climate changes in the future.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="7.The%20contributions%20of%20soil%20biota%20to%20litter%20mass%20loss%20and%20home-field%20advantage%20in%20temperate%20forests.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="productivity" data-num="8">
+      <div class="card-head">
+        <span class="num">08</span>
+        <div class="head-text">
+          <h3 class="title">Disentangling variation patterns and partitioning strategies of net primary productivity insights from cool-temperate forests in South Korea</h3>
+          <p class="authors">Jo, M.S., Han, S.H., Carayugan, M.B. et al.</p>
+          <p class="cite">Ecological Processes 15, 11 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-026-00670-z" target="_blank" rel="noopener">doi:10.1186/s13717-026-00670-z</a></p>
+          <div class="tags"><span class="tag tag-productivity">生产力与资源分配</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Understanding the processes underlying carbon storage and balance is critical for equipping the terrestrial biosphere to respond to contemporary climatic challenges. However, ecosystem-level estimates and distribution of net primary productivity (NPP), a metric for evaluating forest carbon cycling patterns and dynamics, remain constrained by uneven empirical observations between above- and belowground fractions. We herein quantified the rate and composition of NPP for four stands characteristic of the cool-temperate deciduous (Larix kaempferi, LK; Quercus mongolica, QM) and evergreen (Pinus densiflora, PD; Pinus koraiensis, PK) forests of South Korea over a complete annual cycle (2022–2023). Variations in dynamic NPP compartments, particularly (1) canopy litterfall by stand and season and (2) fine root production by stand, diameter class, and depth interval, were further characterized using litter traps and ingrowth cores, respectively.
+Results Total NPP varied from 1226 ± 101 to 1796 ± 154 g m−2 yr−1, with 78–84% allocated aboveground and 16–22% belowground. LK and QM exhibited total NPP up to 46% higher than PD and PK. Both litterfall and fine root production differed considerably across stands, decreasing in the order of QM &gt; PK &gt; PD &gt; LK for litterfall and QM &amp; PD &gt; LK &amp; PK for fine root production. Litterfall peaked in autumn, similar to the leaf phenological rhythm of many temperate deciduous species. In contrast, fine root production showed a negative vertical distribution with depth, which is consistent with decreasing nutrient availability and increasing mechanical impedance along the soil profile.
+Conclusions By disentangling the contribution levels and dynamic patterns of each NPP compartment, our findings demonstrate a strong inclination toward aboveground NPP investment when belowground resources are not limiting. In other words, an adequate nutrient supply enables plants to modify their priority allocation from fine root maintenance to internal resource transport, leaf production, canopy expansion, reproduction, and other critical aboveground functions. Such information underscores the necessity for forest management strategies that target soil fertility to strengthen not only canopy productivity and CO2 sequestration but also ecosystem resilience by reinforcing allocation patterns that sustain high NPP and safeguard forests against shifting climate conditions.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="8.Disentangling%20variation%20patterns%20and%20partitioning%20strategies%20of%20net%20primary%20productivity%20insights%20from%20cool-temperate%20forests%20in%20South%20Korea.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="litter,carbon" data-num="9">
+      <div class="card-head">
+        <span class="num">09</span>
+        <div class="head-text">
+          <h3 class="title">Effects of litter inputs on soil aggregate C turnover and flow differ among three natural forest ecosystems along a climate gradient in China</h3>
+          <p class="authors">Xu, Q., Zhang, W., Hu, J. et al.</p>
+          <p class="cite">Ecological Processes 15, 15 (2026) <a class="doi" href="https://doi.org/10.1186/s13717-025-00668-z" target="_blank" rel="noopener">doi:10.1186/s13717-025-00668-z</a></p>
+          <div class="tags"><span class="tag tag-litter">凋落物与土壤</span><span class="tag tag-carbon">碳循环与生物地球化学</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Plant litter input plays an important role in controlling soil organic carbon (SOC) turnover and the flow of carbon (C) among different pools. However, the relative effects of aboveground and belowground root litter on soil aggregate C dynamics across different forest types and along climate gradients remain poorly understood. In this study, we examined changes in soil aggregate mass proportion, litter-derived and native C contents of macro-aggregate, micro-aggregate and silt + clay fractions, and C flow among these fractions during 2 years of litter input, using 13C isotope tracing technique in tropical, temperate and boreal forests along a climate gradient in China.
+Results The results showed that belowground root litter input enhanced soil aggregation across all three forests, but aboveground litter input had no significant effect. Belowground root litter input increased total and litter-derived C content across aggregate fractions compared to aboveground litter input in the tropical forest, while it decreased native C content in the same forest. However, the effects of litter input on total and litter-derived C contents were minimal in the boreal and temperate forests. In addition, patterns of soil C flow among aggregates varied depending on both litter input type and forest type.
+Conclusions Our results imply that belowground root litter enhances soil aggregation and aggregate C turnover compared to aboveground litter input. Moreover, the effects of root litter input on soil aggregate C turnover and C flow depend on forest types along the climatic gradient.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="9.Effects%20of%20litter%20inputs%20on%20soil%20aggregate%20C%20turnover%20and%20flow%20differ%20among%20three%20natural%20forest%20ecosystems%20along%20a%20climate%20gradient%20in%20China.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="climate,carbon" data-num="10">
+      <div class="card-head">
+        <span class="num">10</span>
+        <div class="head-text">
+          <h3 class="title">Drought-driven declines in water-use efficiency reshape carbon dynamics of a subtropical forest</h3>
+          <p class="authors">Mwangi, B.N., Ayoma, W., Li, Y. et al.</p>
+          <p class="cite">Ecological Processes 14, 73 (2025) <a class="doi" href="https://doi.org/10.1186/s13717-025-00629-6" target="_blank" rel="noopener">doi:10.1186/s13717-025-00629-6</a></p>
+          <div class="tags"><span class="tag tag-climate">全球变化与干扰</span><span class="tag tag-carbon">碳循环与生物地球化学</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Subtropical forests play a critical role in global carbon cycling but are highly sensitive to climate-driven precipitation and temperature variability. At China&#x27;s Dinghushan Biosphere Reserve, observed warming (+ 1.5 °C since 2002) and precipitation declines (8.2 ± 1.3 mm/yr) exceed global subtropical averages, yet their combined effects on water-use efficiency (WUE) and carbon exchange remain poorly quantified.
+Methods Using 21 years of eddy covariance and meteorological data (2002–2022), we analyzed WUE (defined as NEE/ET; g C kg−1 H2O) responses to drought events classified via the standardized precipitation index (SPI).
+Results The reserve experienced increasing drought frequency, with 7 extreme droughts (SPI ≤ –2.0) post-2010 versus 2 pre-2010. Soil moisture extremes (&lt; 0.15 m3 m−3) reduced WUE by 2.35 g C kg–1 H2O. Carbon fluxes showed differential sensitivity: ecosystem respiration (RE) declined most sharply (–71.9 × 10–5 g C m−2 s–1) during extreme droughts, while gross primary productivity (GPP) exhibited non-linear reductions below a 1,200 mm yr–1 precipitation threshold. Late-successional forests maintained 0.94 g C kg–1 H2O higher WUE than mid-successional stands during droughts, linked to deeper rooting systems (120 ± 15 cm). The identified 3-year recovery lag suggests targeted reforestation during wet intervals (SPI ≥ 1.5) could enhance resilience.
+Conclusion By establishing quantitative drought thresholds and revealing hydraulic versus non-hydraulic limitations, our findings provide actionable strategies for subtropical forest conservation under climate change.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="10.Drought-driven%20declines%20in%20water-use%20efficiency%20reshape%20carbon%20dynamics%20of%20a%20subtropical%20forest.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="carbon,climate" data-num="11">
+      <div class="card-head">
+        <span class="num">11</span>
+        <div class="head-text">
+          <h3 class="title">Soil and forest floor respiration already acclimated to increasing temperatures in a mixed deciduous forest</h3>
+          <p class="authors">Scapucci, L., Krebs, L., Burri, S. et al.</p>
+          <p class="cite">Ecological Processes 14, 71 (2025) <a class="doi" href="https://doi.org/10.1186/s13717-025-00639-4" target="_blank" rel="noopener">doi:10.1186/s13717-025-00639-4</a></p>
+          <div class="tags"><span class="tag tag-carbon">碳循环与生物地球化学</span><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Forest ecosystems are in the spotlight for their potential to mitigate anthropogenic carbon dioxide (CO2) emissions through net photosynthesis. However, this mitigation potential can be counteracted by respiratory losses, e.g., from soils and the forest floor. With global warming, soil respiration (SR) rates are expected to increase, unless acclimation occurs. Using manual and automated chambers as well as a below-canopy eddy-covariance system, we quantified SR and forest floor net CO2 exchange (NEEff) for 13 years throughout an 18-year study period (2006–2010, 2015–2016, 2018–2023) in a mixed deciduous forest ecosystem in Switzerland. We identified the contribution of environmental drivers for SR and NEEff using Extreme Gradient Boosting models and Shapley additive explanations (SHAP) analyses and assessed the long-term temperature sensitivity of SR and NEEff.
+Results Over the 18-year study period, soil temperature increased significantly and was the main driver of both SR and NEEff, explaining over 50% of their temporal variability. Differences in drivers and magnitudes of SR vs. NEEff were only found in early spring, when the forest floor vegetation showed net CO2 uptake. Finally, we found no evidence that SR or NEEff (at mean annual temperatures) had increased between 2006 and 2023. Similarly, no significant change in the temperature sensitivity of SR and NEEff was observed.
+Conclusions Combining multiple techniques to assess long-term responses of CO2 fluxes to environmental conditions with machine learning approaches enhanced our understanding of forest responses to climate change. Moreover, our findings suggest that soil and forest floor respiration already acclimated to warmer conditions, highly relevant for predicting future mitigation potentials of forest ecosystems.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="11.Soil%20and%20forest%20floor%20respiration%20already%20acclimated%20to%20increasing%20temperatures%20in%20a%20mixed%20deciduous%20forest.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="carbon" data-num="12">
+      <div class="card-head">
+        <span class="num">12</span>
+        <div class="head-text">
+          <h3 class="title">Ecosystem carbon stock variation along forest stand ages insight from eastern coast mangrove ecosystem of India</h3>
+          <p class="authors">Panda, M., Dash, B.R. &amp; Sahu, S.C</p>
+          <p class="cite">Ecological Processes 14, 14 (2025) <a class="doi" href="https://doi.org/10.1186/s13717-025-00580-6" target="_blank" rel="noopener">doi:10.1186/s13717-025-00580-6</a></p>
+          <div class="tags"><span class="tag tag-carbon">碳循环与生物地球化学</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background The mangrove ecosystem has the highest carbon sink potential which significantly contributes to bringing carbon neutrality. Understanding the carbon stock dynamics along the age of forest stands in the mangrove forest ecosystem is of significance for managing the forests and their carbon accumulation. This study aimed to estimate the forest structural attributes, biomass and total ecosystem carbon stock (TECS) of old natural (age &gt; 50 years) and young planted (age ~ 20 years) mangrove forest stands at Bichitrapur Mangrove Reserve Forest in eastern coast of India. We also attempted to understand the interrelationship of structural attributes, biomass and soil properties in the mangrove forests. To achieve the results, twenty random plots were established (size: 20 m × 25 m) and suitable allometric equations along with species-specific wood density values were used to estimate the biomass and carbon stock.
+Results Altogether, 29 plant species (18 exclusive and 11 associate species) were recorded. The mean total biomass (± SE) and soil organic carbon (at 30 cm depth) were 165.31 ± 20.89 t ha−1 and 40.20 ± 1.24 t C ha−1 for young stands, and 586.12 ± 56.74 t ha−1 and 49.68 ± 2.39 t C ha−1 for old stands, respectively. Among mangrove species, Avicennia marina contributed the highest vegetation biomass in both forest stands (59.72 t ha−1 and 262.28 t ha−1 in young and old stands, respectively), followed by Avicennia officinalis (35.05 t ha−1) and Sonneratia apetala (26.09 t ha−1) in young stand and Avicennia alba (169.28 t ha−1) and Avicennia officinalis (115.58 t ha−1) in old stand. The mean TECS was 235.62 ± 27.34 t C ha−1. The contribution of vegetation and soil to TECS was 63% and 37% in the young stand, whereas in the old stand it was 83% and 17%, respectively. The correlation analyses revealed that mean stand height (r = 0.87), basal area (r = 0.99), soil nitrogen (r = 0.76), potassium (r = 0.78), and carbon (r = 0.80) were significantly positively correlated with total biomass at p &lt; 0.01.
+Conclusions Our results demonstrate that old mangrove forest stands store substantially high carbon stock than young planted forest stands, implying the role of forest age in determining the carbon storage potential of mangrove ecosystems.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="12.Ecosystem%20carbon%20stock%20variation%20along%20forest%20stand%20ages%20insight%20from%20eastern%20coast%20mangrove%20ecosystem%20of%20India.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="community" data-num="13">
+      <div class="card-head">
+        <span class="num">13</span>
+        <div class="head-text">
+          <h3 class="title">Species richness is not a good predictor for above-ground biomass in a warm temperate deciduous broadleaf forest</h3>
+          <p class="authors">He, C., Li, Y., Dai, X. et al.</p>
+          <p class="cite">Ecological Processes 14, 6 (2025) <a class="doi" href="https://doi.org/10.1186/s13717-024-00569-7" target="_blank" rel="noopener">doi:10.1186/s13717-024-00569-7</a></p>
+          <div class="tags"><span class="tag tag-community">群落构建与多样性</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Biomass is the result of long-term production and metabolism in forest ecosystems and is an important indicator of the carbon storage capacity of forests. Although there is increasing empirical evidence supporting the positive impact of biodiversity on forest productivity and biomass, there is still uncertainty about the relative importance of tree diversity in determining carbon storage compared to other factors such as environmental conditions, functional characteristics and stand structure, especially in complex forest ecosystems.
+Methods In this study, based on dataset from a 25-ha forest dynamics monitoring plot, we investigated the effects of tree diversity, environmental variables, functional traits and stand structural attributes on above-ground biomass (AGB). Spearman correlation coefficients were used to analyze the correlations between AGB and the variables. The relative importance of these factors in influencing AGB variation was assessed using a random forest model. Structural equation model was used to determine the direct or indirect effects of each factor on AGB.
+Results The results showed a negative, though not significant, correlation between species richness and AGB. There was a significant positive correlation between leaf dry matter content and leaf tissue density, implying that more leaf photosynthetic products were utilized for dry matter accumulation. The variation in AGB was mainly explained by the maximum diameter at breast height and the coefficients of variation of diameter at breast height, suggesting that large diameter individuals contribute disproportionately to AGB. In addition, AGB was also influenced by topographic factors (i.e., altitude and slope), while there was no significant correlation with soil variables.
+Conclusions This study reflects the response of AGB to different influencing factors. Our study emphasizes that stand structure attributes may be more suitable as predictors of forest AGB than species richness.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="13.Species%20richness%20is%20not%20a%20good%20predictor%20for%20above-ground%20biomass%20in%20a%20warm%20temperate%20deciduous%20broadleaf%20forest.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="invasion" data-num="14">
+      <div class="card-head">
+        <span class="num">14</span>
+        <div class="head-text">
+          <h3 class="title">Disentangling the invasion process of subtropical native forests of Uruguay by the exotic tree Ligustrum lucidum establishment and dominance determinants</h3>
+          <p class="authors">Brazeiro, A., Olivera, J., Betancourt, A. et al.</p>
+          <p class="cite">Ecological Processes 13, 49 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00512-w" target="_blank" rel="noopener">doi:10.1186/s13717-024-00512-w</a></p>
+          <div class="tags"><span class="tag tag-invasion">生物入侵</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background What factors, processes and mechanisms regulate invasive processes and their effects? This is one of the main questions addressed by the ecology of biological invasions. Ligustrum lucidum, a tree species native to East Asia, became an aggressive invader of subtropical and temperate forests around the world. We analyzed here the L. lucidum invasion in Uruguayan forests to determine the factors controlling two stages of the invasive process, the establishment, and the dominance. Establishment was assessed by the occurrence, measured in 1525, 1 × 1 km-cells, and dominance by remotely measuring the L. lucidum coverage at the forest canopy in 5554, 1 × 1 km-cells. The occurrence and dominance were modeled using Generalized Linear Models in function of independent environmental and geographic variables.
+Results Ligustrum lucidum has become established in 13.4% of the Uruguayan forests and has dominated the forest canopy in 1.2%. Our models explained 45% and 35% of the occurrence and dominance spatial variance respectively and detected in both cases strong diffusion patterns from the S-SW region to rest of Uruguay. Occurrence increased mainly in function of urban areas, and with the proximity to towns, probably because L. lucidum trees planted in gardens are seed sources, and near railways and highways, that could function as biological corridors. Occurrence also increased in loamy soils and near rivers, suggesting moisture conditions are favorable for establishment. Dominance increased with reduced forest area, in high productive soils and at higher altitudes. Moreover, dominance increased near urban areas, roads, and railways, as well as in highly afforested landscapes, and in loamy and low-rockiness soils.
+Conclusions The invasion of Uruguayan forests by L. lucidum is in the spread and impact stages, currently in expansion from the invasion focus on the S-SW region, where the oldest urbanizations are settled, towards the rest of the country. The geographic proximity to the invasion focus is currently the main predictor of both L. lucidum establishment and dominance. Additionally, whereas establishment is manly facilitated by human infrastructures improving propagule pressure and dispersion, dominance is enhanced in small or fragmented forest patches, in rich-nutrient soils, and at higher altitudes, suggesting ecosystem resistance is also operating.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="14.Disentangling%20the%20invasion%20process%20of%20subtropical%20native%20forests%20of%20Uruguay%20by%20the%20exotic%20tree%20Ligustrum%20lucidum%20establishment%20and%20dominance%20determinants.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="carbon,climate" data-num="15">
+      <div class="card-head">
+        <span class="num">15</span>
+        <div class="head-text">
+          <h3 class="title">Autumn sunlight promotes aboveground carbon loss in a temperate mixed forest</h3>
+          <p class="authors">Li, X., Wang, Y., Zhang, J. et al.</p>
+          <p class="cite">Ecological Processes 13, 48 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00528-2" target="_blank" rel="noopener">doi:10.1186/s13717-024-00528-2</a></p>
+          <div class="tags"><span class="tag tag-carbon">碳循环与生物地球化学</span><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Photodegradation of plant litter plays a pivotal role in the global carbon (C) cycle. In temperate forest ecosystems, the exposure of plant litter to solar radiation can be significantly altered by changes in autumn phenology and snow cover due to climatic change. How this will affect litter decomposition and nutrient dynamic interacting with forest canopy structure (understorey vs. gaps) is uncertain. In the present study, we conducted a field experiment using leaf litter of early-fall deciduous Betula platyphylla (Asian white birch) and late-fall deciduous Quercus mongolica (Mongolian oak) to explore the effect of change in autumn solar radiation on dynamics of litter decomposition in a gap and understorey of a temperate mixed forest.
+Results Exposure to the full-spectrum of not only significantly increased the loss of mass, C, and lignin, but also modified N loss through both immobilization and mineralization during the initial decomposition during autumn canopy opening, irrespective of canopy structure and litter species. These effects were mainly driven by the blue-green spectral region of sunlight. Short-term photodegradation by autumn solar radiation had a positive legacy effect on the later decomposition particularly in the forest gap, increasing mass loss by 16% and 19% for Asian white birch and Mongolia oak, respectively.
+Conclusions Our results suggest that earlier autumn leaf-fall phenology and/or later snow cover due to land-use or climate change would increase the exposure of plant organic matter to solar radiation, and accelerate ecosystem processes, C and nutrient cycling in temperate forest ecosystems. The study provides a reference for predictive research on carbon cycling under the background of global climate change.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="15.Autumn%20sunlight%20promotes%20aboveground%20carbon%20loss%20in%20a%20temperate%20mixed%20forest.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="productivity,management" data-num="16">
+      <div class="card-head">
+        <span class="num">16</span>
+        <div class="head-text">
+          <h3 class="title">Effects of biotic and abiotic factors on ecosystem multifunctionality of plantations</h3>
+          <p class="authors">Tian, J., Ni, T., Miao, Z. et al.</p>
+          <p class="cite">Ecological Processes 13, 44 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00525-5" target="_blank" rel="noopener">doi:10.1186/s13717-024-00525-5</a></p>
+          <div class="tags"><span class="tag tag-productivity">生产力与资源分配</span><span class="tag tag-management">森林经营与恢复</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Mixed forests are better than monoculture forests in biodiversity, stand structure and productivity stability. However, a more comprehensive assessment of the ecosystem functions of monoculture and mixed plantations is lacking. We compared the single functions and ecosystem multifunctionality (EMF) in Fraxinus mandshurica and Larix olgensis mixed plantations with monoculture plantations in Northeast China and discussed the influences of biodiversity and environmental factors on EMF.
+Results The mixed plantations had higher biodiversity and ecological functions. Biodiversity was significantly higher in mixed plantations (such as CWMMH, Shrub.Shannon, Shrub.Richness, Herb.Shannon, Herb.Richness), but environmental factors differed less among the three forest types, and belowground diversity differed significantly only in the Bacterial.Shannon and Fungal.Shannon. Mixed plantations showed significant differences in single ecological functions relative to monoculture plantations, with more pronounced differences between mixed plantations and Larix olgensis monoculture plantations. Weighted ecosystem multifunctionality was significantly higher in mixed plantations than in monoculture plantations. EMF was mainly driven by tree diversity, environmental factors, shrub and herb species diversity, and soil microbial alpha diversity, which explained 25.35%, 8.94%, 8.83%, and 7.65% of the variation, respectively.
+Conclusions The establishment of mixed plantations can increase the biodiversity of forest stands and improve the ecosystem functions. These results highlight the advantages of multi-species plantations and the necessity of planting them. They are important for the conservation of biodiversity and the sustainable management of plantations.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="16.Effects%20of%20biotic%20and%20abiotic%20factors%20on%20ecosystem%20multifunctionality%20of%20plantations.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="carbon,management" data-num="17">
+      <div class="card-head">
+        <span class="num">17</span>
+        <div class="head-text">
+          <h3 class="title">A network meta-analysis on responses of forest soil carbon concentration to interventions</h3>
+          <p class="authors">Shen, K., Li, L., Wei, S. et al.</p>
+          <p class="cite">Ecological Processes 13, 41 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00513-9" target="_blank" rel="noopener">doi:10.1186/s13717-024-00513-9</a></p>
+          <div class="tags"><span class="tag tag-carbon">碳循环与生物地球化学</span><span class="tag tag-management">森林经营与恢复</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Forests play a crucial role in absorbing CO2 from the atmosphere. 55% of the carbon in terrestrial ecosystems is stored in forests, with the majority of forest carbon stored in soil. To better understand soil organic carbon (SOC) of forests and to access interventions that affect their SOC concentration, we conducted a comparative analysis between natural and planted forests. Forest interventions refer to the actions taken by humans to manage, protect, or transform forests, and can be divided into two main categories: environmental intervention and anthropogenic intervention. This study focused on the effects of different interventions on SOC in natural and planted forests by reviewing a total of 75 randomized controlled trials in the global literature and extracting a total of 15 different interventions.
+Results Through network meta-analysis, we found that natural forests have 22.3% higher SOC than planted forests, indicating their stronger carbon storage function. In natural forests, environmental interventions have a stronger impact. SOC is significantly influenced by forest age, fertilization, and elevation. In planted forests, however, anthropogenic interventions have a stronger impact. Pruning branches and fertilization are effective interventions for planted forests. Furthermore, forest degradation has a significantly negative impact on SOC in planted forests.
+Conclusion Overall, interventions to enhance soil carbon storage function differ between natural and planted forests. To address global climate change, protect biodiversity, and achieve sustainable development, it is imperative to globally protect forests and employ scientifically sound forest management practices. Regarding natural forests, the emphasis should be on comprehending the effects of environmental interventions on SOC. Conversely, concerning planted forests, the emphasis should be on comprehending the effects of anthropogenic interventions.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="17.A%20network%20meta-analysis%20on%20responses%20of%20forest%20soil%20carbon%20concentration%20to%20interventions.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="management,climate" data-num="18">
+      <div class="card-head">
+        <span class="num">18</span>
+        <div class="head-text">
+          <h3 class="title">Long-term monitoring reveals the effect of precipitation and silviculture on Nothofagus regeneration in Northern Patagonia mixed forests</h3>
+          <p class="authors">Sola, G., Mateo, C., Dezzotti, A. et al.</p>
+          <p class="cite">Ecological Processes 13, 28 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00509-5" target="_blank" rel="noopener">doi:10.1186/s13717-024-00509-5</a></p>
+          <div class="tags"><span class="tag tag-management">森林经营与恢复</span><span class="tag tag-climate">全球变化与干扰</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Tree regeneration is a key component of resilience because it promotes post-disturbance recovery of forests. Northwestern Patagonia from Argentina is occupied by Nothofagus alpina (Na), N. obliqua (No), and N. dombeyi (Nd) forests that grow along an intense precipitation gradient, managed throughout shelterwood silvicultural system by technicians of the Lanin Natural Reserve. The objective of this study was to evaluate the influence of seeding cuttings over the dynamics of Nothofagus mixed forests across landscape (precipitation gradient) based mainly on the composition and abundance of tree regeneration, permanent sampling plots and generalized linear mixed models. In particular, we analysed: (i) the structure of sexual and asexual regeneration during &lt; 10, 10–20 and &gt; 20 years after harvest (the dynamics of managed forests), and (ii) the structure of sexual regeneration in primary and managed forests after &gt; 20 years of harvest (the effect of silviculture).
+Results Nd was the most abundant species in the regeneration of managed forests during all periods in both sites despite its lower contribution to the adult cohort. During the 10–20 years period after harvest, the humid site exhibited higher regeneration density than the mesic site (120,000 and 6000 ind ha−1, respectively), and it decreased afterwards. The number of established regeneration (&gt; 2 m height) was lower for Na in the mesic site and for No in the humid site (0 and 57 ind ha−1, respectively). However, in comparison to No, Na showed a higher number of sprouted stumps and sprouts per stump, and a higher sprout height in the mesic site. No exhibited higher sprout mortality in the humid site. Finally, the regeneration of primary forests showed lower density and height, and a more balanced composition than that of managed forests.
+Conclusions The silvicultural effects on the mixed forest regeneration dynamics was strongly influenced by the condition of sites. Therefore, management prescriptions should be adjusted in order to consider the environmental variation occurring through the entire landscape. An adaptive management that considers the pattern and process of sexual and asexual regeneration and disturbance will contribute to promote a greater resilience of mixed forest ecosystems.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="18.Long-term%20monitoring%20reveals%20the%20effect%20of%20precipitation%20and%20silviculture%20on%20Nothofagus%20regeneration%20in%20Northern%20Patagonia%20mixed%20forests.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="litter,management" data-num="19">
+      <div class="card-head">
+        <span class="num">19</span>
+        <div class="head-text">
+          <h3 class="title">Linkages among leaf nutrient concentration, resorption efficiency, litter decomposition and their stoichiometry to canopy nitrogen addition and understory removal</h3>
+          <p class="authors">Shah, J.A., Liu, W., Ullah, S. et al.</p>
+          <p class="cite">Ecological Processes 13, 27 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00507-7" target="_blank" rel="noopener">doi:10.1186/s13717-024-00507-7</a></p>
+          <div class="tags"><span class="tag tag-litter">凋落物与土壤</span><span class="tag tag-management">森林经营与恢复</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background The prevalence of understory removal and anthropogenic nitrogen (N) deposition has significantly altered the ecological processes of forest ecosystems at both regional and global scales. However, it remains a pressing challenge to understand how N deposition and understory removal affect leaf nutrient dynamics, nutrient resorption, litter decomposition, and their linkages for better managing forest ecosystems under nutrient imbalances induced by N enrichment. To address this research gap, a field manipulation experiment was carried out in a subtropical Cunninghamia lanceolata plantation with four treatments including: control (CK), canopy N addition (CN), understory removal (UR), and canopy N addition plus understory removal (CN × UR). Green and senesced leaf N and phosphorus (P) concentrations, N and P resorption efficiencies, litter decomposition, and their correlations were measured.
+Results The results revealed that the average N concentrations of green early and late leaves in UR were increased by 6.61 and 18.89% compared to CK. UR had the highest whereas CN had the lowest P concentrations in green leaves across the two sampling seasons. Following this, UR, leaf type, season, and their interactions significantly affected leaf N, P, and N:P (P &lt; 0.05). The highest leaf N resorption (32.68%) and P resorption efficiencies (63.96%) were recorded in UR. Litter decomposition was significantly retarded in UR (P &lt; 0.01) relative to CN. The regression analysis demonstrated that leaf nutrient status was significantly interconnected with leaf nutrient resorption efficiencies. In addition, leaf nutrient dynamics were strongly correlated with litter nutrients, indicating that both were coupled.
+Conclusion These findings can deepen our knowledge of biogeochemical cycling and reveal contrasting nutrient-acquisition strategies on N and P limitation in response to UR and CN. Considering the P limitation, it is important to note that P was resorbed more efficiently, illustrating a remarkable nutrient preservation approach for nutrient-limitations. Resorption may be a crucial mechanism for keeping nutrients in these forests, so better understory management practices are required to prevent reliance on external nutrient pools. Overall, this study sheds meaningful insights into the ability of forest adaptation in response to global climatic change.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="19.Linkages%20among%20leaf%20nutrient%20concentration%2C%20resorption%20efficiency%2C%20litter%20decomposition%20and%20their%20stoichiometry%20to%20canopy%20nitrogen%20addition%20and%20understory%20removal.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+
+    <article class="card" data-tags="management" data-num="20">
+      <div class="card-head">
+        <span class="num">20</span>
+        <div class="head-text">
+          <h3 class="title">Quality evaluation of Nothofagus pumilio seeds linked to forest management and climatic events</h3>
+          <p class="authors">Rodríguez-Souilla, J., Chaves, J.E., Lencinas, M.V. et al.</p>
+          <p class="cite">Ecological Processes 13, 7 (2024) <a class="doi" href="https://doi.org/10.1186/s13717-024-00485-w" target="_blank" rel="noopener">doi:10.1186/s13717-024-00485-w</a></p>
+          <div class="tags"><span class="tag tag-management">森林经营与恢复</span></div>
+        </div>
+      </div>
+      <details class="abs-wrap">
+        <summary class="abs-toggle">摘要 / Abstract</summary>
+        <div class="abstract">Background Forest ecosystems undergo significant transformations due to harvesting and climate fluctuations, emphasizing the critical role of seeding in natural regeneration and long-term structural preservation. Climate change further amplifies these dynamics, affecting phenology across species and regions. In Tierra del Fuego (Argentina), Nothofagus pumilio (lenga) forests represent the most important timber resource, and it is managed through different silvicultural strategies. This species demonstrates notable post-disturbance regeneration, yet seed fall exhibits significant variability, leading to variations in seed quality (e.g., viability). This study aims to assess fluctuations in N. pumilio seed quality, determine how it varies concerning forest management strategies, annual productivity, and the co-occurrence of climatic phenomena including El Niño-Southern Oscillation (ENSO) and the Southern Annular Mode (SAM).
+Results Viable seeds represented 18.4% of the total, notably higher in unharvested than in managed areas. Conversely, empty seeds were more prevalent in harvested areas (&gt; 75%). Seed quality exhibited significant differences across silvicultural treatments, except for insect-predated seeds, which had similar proportions across all areas, though dispersed retention showed higher predation. When considering years with varying production levels, high-production years favoured full and viable seeds, particularly in unharvested forests and aggregated retention, while low-production years saw reduced viability across all treatments. Quadratic models revealed that viability increased with seed production, where unharvested forests achieved the highest values. Climate variability influenced seed proportions, where ENSO+/SAM+ promoting more full and viable seeds, while ENSO–/SAM+ favoured non-predated seeds, especially in unharvested stands.
+Conclusions Seed quality varies among treatments and years with different levels of seeding. Variations in seed quality, linked to climatic events, influence seed viability. Seed quality plays a critical role in forest regeneration, ensuring a seedling bank for harvested stands to face climate variability. These findings are relevant for forest management and ecosystem services, considering the increasing climate variability and extreme events. Understanding these influences is crucial for Nothofagus pumilio forests&#x27; sustainability and global forest adaptation strategies.</div>
+      </details>
+      <div class="card-foot">
+        <a class="btn" href="20.Quality%20evaluation%20of%20Nothofagus%20pumilio%20seeds%20linked%20to%20forest%20management%20and%20climatic%20events.pdf" target="_blank" rel="noopener">查看 / 下载 PDF</a>
+      </div>
+    </article>
+  </div>
+  <div class="empty" id="empty">没有匹配的论文。</div>
+</main>
+
+<footer>
+  虚拟专刊由编辑部整理 · 论文版权归 Ecological Processes / Springer Nature 所有 ·
+  点击“查看 / 下载 PDF”可打开本地原文
+</footer>
+
+<script>
+  const search = document.getElementById('search');
+  const chips = document.getElementById('chips');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const empty = document.getElementById('empty');
+  let activeTag = 'all';
+  function filter() {
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(c => {
+      const tags = c.dataset.tags.split(',');
+      const okTag = activeTag === 'all' || tags.includes(activeTag);
+      const okText = !q || c.textContent.toLowerCase().includes(q);
+      const ok = okTag && okText;
+      c.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+  search.addEventListener('input', filter);
+  chips.addEventListener('click', e => {
+    if (!e.target.classList.contains('chip')) return;
+    chips.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+    e.target.classList.add('active');
+    activeTag = e.target.dataset.tag;
+    filter();
+  });
+</script>
+</body>
+</html>
